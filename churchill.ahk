@@ -17,6 +17,8 @@ splash_counter(MediaElementArray.Length())
 F2::
   Sleep, 100
   FillInMediaWidget(MediaElementArray)
+  Send, 1
+  MouseMove, 1568, 719
   Send ^q
   Return
 
@@ -24,6 +26,7 @@ F2::
 +c::
 Clipboard := "" ; Start off empty to allow ClipWait to detect when the text has arrived.
 Send ^c         ; Copy text
+Sleep, 50
 Send, {F4}      ; Push Clipboard to the buffer
 return
 
@@ -65,6 +68,7 @@ r::Send ^w
 ; Reset app
 ^q::
   MediaElementArray := []
+  LatestElement := "some random text"
   splash_counter(MediaElementArray.Length())
   return
 
