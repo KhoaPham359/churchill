@@ -9,7 +9,6 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 
 ; Program initialization
 Clipboard :=
-LatestElement := "Some random text for later comparisons"
 MediaElementArray := []
 splash_counter(MediaElementArray.Length())
 
@@ -37,12 +36,15 @@ If Clipboard =                        ; Handling Empty clipboard cases
   MsgBox,,,Clipboard is empty!
   Return
 }
-If (LatestElement = Clipboard)        ; Handling Duplicate element cases
+
+; Check Duplicate
+For index, element in MediaElementArray
 {
+  If (element = Clipboard) 
   MsgBox,,,Duplicate element!
 }
+
 MediaElementArray.Push(Clipboard)
-LatestElement := Clipboard            ; Store current element to the buffer
 Clipboard :=                          ; Clear Clipboard for later usages
 splash_counter(MediaElementArray.Length())  ; Update the splash counter
 return
@@ -67,9 +69,7 @@ r::Send ^w
 
 ; Reset app
 ^q::
-  MediaElementArray := []
-  LatestElement := "some random text"
-  splash_counter(MediaElementArray.Length())
+  Reload
   return
 
 ;Exit app
