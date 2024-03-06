@@ -8,5 +8,6 @@ splash_counter(MediaCount)
     (
     Count: %MediaCount%
     )
-    WinMove, Elements:, , (A_ScreenWidth - 200), (A_ScreenHeight - 1080)
+    ; WinMove, Elements:, , (A_ScreenWidth - 200), (A_ScreenHeight - 1080)
+    WinMove, Elements:, , 0, 0
 }

@@ -4,20 +4,35 @@ SendMode Input  ; Recommended for new scripts due to its superior speed and reli
 SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 #SingleInstance, force
 
+ini = %A_Scriptdir%\variables.ini
+If !FileExist(ini) {
+  MsgBox, 48, Error, File not found.`n`n%ini%
+  Return
+}
+
 #Include, splashText.ahk
-#Include, fillFunc.ahk
+
 
 ; Program initialization
 Clipboard :=
 MediaElementArray := []
 splash_counter(MediaElementArray.Length())
 
+; Mouse move to submit button
+IniRead, xSubmit, %ini%, SubmitButton, x
+IniRead, ySubmit, %ini%, SubmitButton, y
+; msgbox % xSubmit
+; msgbox % ySubmit
+
+; GUI configuration
+#Include, gui.ahk
+#Include, fillFunc.ahk
 ; F2 ; Fill in the media widget
 F2::
   Sleep, 100
   FillInMediaWidget(MediaElementArray)
   Send, 1
-  MouseMove, 1568, 719
+  MouseMove, %xSubmit%, %ySubmit%
   Send ^q
   Return
 
@@ -69,8 +84,11 @@ r::Send ^w
 
 ; Reset app
 ^q::
-  Reload
+  MediaElementArray := []
+  splash_counter(MediaElementArray.Length())
   return
 
 ;Exit app
 Esc::ExitApp
+
+

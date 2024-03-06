@@ -2,17 +2,18 @@
 SendMode Input
 SetWorkingDir, %A_ScriptDir%
 
-MainPosition := 360
-DistanceBetweenObj := 55 
 
 ; This func use client position
+; Fill all the media links in memory to SRT page
 FillInMediaWidget(ElementArray) 
 {
-  global MainPosition
-  global DistanceBetweenObj
+  ini = %A_Scriptdir%\variables.ini
+  IniRead, xMainPosition, %ini%, NumberOfMediaElements, x
+  IniRead, yMainPosition, %ini%, NumberOfMediaElements, y
+  ; global DistanceBetweenObj
 
-  MouseClick, Left, 599, 211
-  Send % ElementArray.Length()
+  MouseClick, Left, %xMainPosition%, %yMainPosition%
+  Send % ElementArray.Length() ; fill in number of elements
   Loop, 2
   {
     Sleep, 50
@@ -20,7 +21,7 @@ FillInMediaWidget(ElementArray)
   }
   For index, element in ElementArray
   {
-    YPosition := MainPosition + (index - 1) * DistanceBetweenObj
+    ; YPosition := MainPosition + (index - 1) * DistanceBetweenObj
     Clipboard := ""
     Clipboard := element
     Send ^v
