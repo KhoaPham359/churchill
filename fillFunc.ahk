@@ -11,7 +11,7 @@ FillInMediaWidget(ElementArray)
   IniRead, xMainPosition, %ini%, NumberOfMediaElements, x
   IniRead, yMainPosition, %ini%, NumberOfMediaElements, y
   ; global DistanceBetweenObj
-
+  CoordMode, Mouse, Screen
   MouseClick, Left, %xMainPosition%, %yMainPosition%
   Send % ElementArray.Length() ; fill in number of elements
   Loop, 2
