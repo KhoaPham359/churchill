@@ -12,7 +12,7 @@ If !FileExist(ini) {
 }
 
 #Include, splashText.ahk
-
+#Include, guiDisplayText.ahk
 
 ; Program initialization
 Clipboard :=
@@ -51,7 +51,7 @@ return
 F4::
 If Clipboard =                        ; Handling Empty clipboard cases
 {
-  MsgBox,,,Clipboard is empty!
+  guiDisplayText("Clipboard is empty!")
   Return
 }
 
@@ -59,7 +59,10 @@ If Clipboard =                        ; Handling Empty clipboard cases
 For index, element in MediaElementArray
 {
   If (element = Clipboard) 
-  MsgBox,,,Duplicate element!
+  {
+    guiDisplayText("Duplicate element!")
+    Break
+  }
 }
 
 MediaElementArray.Push(Clipboard)
