@@ -8,8 +8,10 @@ guiDisplayText(message)
   gui, 3:show, w200 h70
   gui, 3:+AlwaysOnTop
   gui, 3:-caption Border
+  pause, on
   return
   Continue:
     gui, 3:Destroy
-    return
+    Pause, off
+  return
 }
