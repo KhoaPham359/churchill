@@ -4,7 +4,6 @@ SendMode Input  ; Recommended for new scripts due to its superior speed and reli
 SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 #SingleInstance, force
 
-
 ini = %A_Scriptdir%\variables.ini
 If !FileExist(ini) {
   MsgBox, 48, Error, File not found.`n`n%ini%
@@ -19,11 +18,10 @@ Clipboard :=
 MediaElementArray := []
 splash_counter(MediaElementArray.Length())
 
-; Mouse move to submit button
-
 ; GUI configuration
 #Include, gui.ahk
 #Include, fillFunc.ahk
+
 ; F2 ; Fill in the media widget
 F2::
   Sleep, 100
@@ -37,39 +35,40 @@ F2::
   CoordMode, Mouse, Screen
   MouseMove, %xSubmit%, %ySubmit%
   Send ^q
-  Return
+Return
 
 ; Shift + C ; Copy text then insert to the buffer
 +c::
-Clipboard := "" ; Start off empty to allow ClipWait to detect when the text has arrived.
-Send ^c         ; Copy text
-Sleep, 50
-Send, {F4}      ; Push Clipboard to the buffer
+  Clipboard := "" ; Start off empty to allow ClipWait to detect when the text has arrived.
+  Send ^c         ; Copy text
+  Sleep, 50
+  Send, {F4}      ; Push Clipboard to the buffer
 return
 
 ; F4 ; Push Clipboard to buffer
 F4::
-If Clipboard =                        ; Handling Empty clipboard cases
-{
-  guiDisplayText("Clipboard is empty!")
-  Return
-}
-
-; Check Duplicate
-For index, element in MediaElementArray
-{
-  If (element = Clipboard) 
+  If Clipboard =                        ; Handling Empty clipboard cases
   {
-    guiDisplayText("Duplicate element!")
-    Break
+    guiDisplayText("Clipboard is empty!")
+    Return
   }
-}
 
-MediaElementArray.Push(Clipboard)
-Clipboard :=                          ; Clear Clipboard for later usages
-splash_counter(MediaElementArray.Length())  ; Update the splash counter
+  ; Check Duplicate
+  For index, element in MediaElementArray
+  {
+    If (element = Clipboard) 
+    {
+      guiDisplayText("Duplicate element!")
+      SetTitleMatchMode, 2
+      ; if WinExist("Google Chrome")
+      ;   WinActivate
+      Break
+    }
+  }
+  MediaElementArray.Push(Clipboard)
+  Clipboard :=                          ; Clear Clipboard for later usages
+  splash_counter(MediaElementArray.Length())  ; Update the splash counter
 return
-
 ; Functional Macro
 ;Copy adress
 `::
@@ -80,7 +79,7 @@ return
   Send +c
   Sleep, 100
   Send ^w
-  Return
+Return
 
 ; Right Arrow
 z::SendInput, {Right}
@@ -92,7 +91,7 @@ r::Send ^w
 ^q::
   MediaElementArray := []
   splash_counter(MediaElementArray.Length())
-  return
+return
 
 ;Exit app
 Esc::ExitApp
