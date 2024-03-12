@@ -2,7 +2,9 @@
   SetTitleMatchMode, 2
 SetWorkingDir, %A_ScriptDir%
 ;DEFINE VARIABLE
-version := "1.0"
+
+IniRead, version, %ini%, Version, ver
+; version := "1.0"
 ini = %A_Scriptdir%\variables.ini
 IniRead, xNoE, %ini%, NumberOfMediaElements, x
 IniRead, yNoE, %ini%, NumberOfMediaElements, y
@@ -39,12 +41,12 @@ ButtonStart:
 return
 
 PickPoint1:
-if WinExist("Google Chrome")
-  WinActivate
-Gui, Hide
-Gui, 2:Show, w80 h50
-checking := true
-SetTimer, checkPos, 250
+  if WinExist("Google Chrome")
+    WinActivate
+  Gui, Hide
+  Gui, 2:Show, w80 h50
+  checking := true
+  SetTimer, checkPos, 250
 return
 
 PickPoint2:
