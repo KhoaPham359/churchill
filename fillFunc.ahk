@@ -14,7 +14,7 @@ FillInMediaWidget(ElementArray)
   CoordMode, Mouse, Screen
   MouseClick, Left, %xMainPosition%, %yMainPosition%
   Send % ElementArray.Length() ; fill in number of elements
-  Loop, 2
+  Loop, 3
   {
     Sleep, 50
     Send, {Tab}
