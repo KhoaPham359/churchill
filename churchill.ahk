@@ -59,7 +59,7 @@ F4::
     If (element = Clipboard) 
     {
       guiDisplayText("Duplicate element!")
-      SetTitleMatchMode, 2
+      ; SetTitleMatchMode, 2
       ; if WinExist("Google Chrome")
       ;   WinActivate
       Break
