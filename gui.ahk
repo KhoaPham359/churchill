@@ -22,7 +22,7 @@ Gui, Add, Text, x150 y105 w200 vTxtSB
 GuiControl, , TxtSB, current: x=%xSB% y=%ySB% 
 
 Gui, +AlwaysOnTop
-Gui, Show, w350 h150, Churchill Assistant ver %version%, `t
+Gui, Show, w350 h150, AutoChurchill ver %version%, `t
 
 ; GUI 2
 ; get position
