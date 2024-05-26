@@ -39,6 +39,7 @@ F2::
   Total := Total + 1
   Send ^q
 Return
+#If
 
 ; Shift + C ; Copy text then insert to the buffer
 +c::
@@ -88,7 +89,7 @@ return
 Space::
   send ^+c
 return
-
+#If
 
 ;Copy adress
 #IfWinActive, Google Chrome
@@ -101,14 +102,17 @@ return
   Sleep, 100
   Send ^w
 Return
+#If
 
 ; Right Arrow
 #IfWinActive, Google Chrome
 z::SendInput, {Right}
+#If
 
 ; Close tab
 #IfWinActive, Google Chrome
 r::Send ^w
+#If
 
 ; Reset app
 ^q::
@@ -117,10 +121,12 @@ r::Send ^w
 return
 
 ; Remove the last element in MediaElementArray
+#IfWinActive, Google Chrome
 BackSpace::
   MediaElementArray.Pop()
   splash_counter(MediaElementArray.Length(), Total)
 Return
+#If
 
 ;Exit app
 Esc::ExitApp
