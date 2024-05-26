@@ -35,8 +35,8 @@ F2::
   ; msgbox % ySubmit
   CoordMode, Mouse, Screen
   MouseMove, %xSubmit%, %ySubmit%
-  Send ^q
   Total := Total + 1
+  Send ^q
 Return
 
 ; Shift + C ; Copy text then insert to the buffer
