@@ -3,7 +3,7 @@
 SendMode Input  ; Recommended for new scripts due to its superior speed and reliability.
 SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 #SingleInstance, force
-
+SetTitleMatchMode, 2
 ini = %A_Scriptdir%\variables.ini
 If !FileExist(ini) {
   MsgBox, 48, Error, File not found.`n`n%ini%
@@ -24,6 +24,7 @@ splash_counter(MediaElementArray.Length(), Total)
 #Include, fillFunc.ahk
 
 ; F2 ; Fill in the media widget
+#IfWinActive, Google Chrome
 F2::
   Sleep, 100
   FillInMediaWidget(MediaElementArray)
@@ -83,12 +84,14 @@ return
 ; Functional Macro
 
 ;Dev tool
+#IfWinActive, Google Chrome
 Space::
   send ^+c
 return
 
 
 ;Copy adress
+#IfWinActive, Google Chrome
 `::
   Send, {CtrlDown}}}{Tab}{CtrlUp}}
   Sleep, 100
@@ -100,9 +103,11 @@ return
 Return
 
 ; Right Arrow
+#IfWinActive, Google Chrome
 z::SendInput, {Right}
 
 ; Close tab
+#IfWinActive, Google Chrome
 r::Send ^w
 
 ; Reset app
