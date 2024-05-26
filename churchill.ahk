@@ -16,7 +16,8 @@ If !FileExist(ini) {
 ; Program initialization
 Clipboard :=
 MediaElementArray := []
-splash_counter(MediaElementArray.Length())
+Total := 0
+splash_counter(MediaElementArray.Length(), Total)
 
 ; GUI configuration
 #Include, gui.ahk
@@ -35,6 +36,7 @@ F2::
   CoordMode, Mouse, Screen
   MouseMove, %xSubmit%, %ySubmit%
   Send ^q
+  Total := Total + 1
 Return
 
 ; Shift + C ; Copy text then insert to the buffer
@@ -44,6 +46,8 @@ Return
   Sleep, 50
   Send, {F4}      ; Push Clipboard to the buffer
 return
+
+
 
 ; F4 ; Push Clipboard to buffer
 F4::
@@ -65,11 +69,25 @@ F4::
       Break
     }
   }
+  firstChar := SubStr(Clipboard, 1, 1)
+  
+  ;Trying to remove double quote
+  If (firstChar = """")
+  {
+    Clipboard := StrReplace(Clipboard, """", "")
+  }
   MediaElementArray.Push(Clipboard)
-  Clipboard :=                          ; Clear Clipboard for later usages
-  splash_counter(MediaElementArray.Length())  ; Update the splash counter
+  ;Clipboard :=                          ; Clear Clipboard for later usages
+  splash_counter(MediaElementArray.Length(), Total)  ; Update the splash counter
 return
 ; Functional Macro
+
+;Dev tool
+Space::
+  send ^+c
+return
+
+
 ;Copy adress
 `::
   Send, {CtrlDown}}}{Tab}{CtrlUp}}
@@ -90,8 +108,14 @@ r::Send ^w
 ; Reset app
 ^q::
   MediaElementArray := []
-  splash_counter(MediaElementArray.Length())
+  splash_counter(MediaElementArray.Length(), Total)
 return
+
+; Remove the last element in MediaElementArray
+BackSpace::
+  MediaElementArray.Pop()
+  splash_counter(MediaElementArray.Length(), Total)
+Return
 
 ;Exit app
 Esc::ExitApp

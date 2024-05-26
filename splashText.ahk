@@ -2,11 +2,11 @@
 SendMode Input
 SetWorkingDir, %A_ScriptDir%
 
-splash_counter(MediaCount)
+splash_counter(MediaCount,Total)
 {
-    SplashTextOn, 200, 40, Elements:, 
+    SplashTextOn, 250, 40, Elements:, 
     (
-    Count: %MediaCount%
+    Count: %MediaCount% `t Total: %Total%
     )
     ; Option to move splashText to up-right corner
     ; Use specific display resolution
